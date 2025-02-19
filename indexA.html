@@ -56,6 +56,7 @@
         var moeda;
         var pontuacao = 0;
         var placar;
+        var cometa;
 
         // Carrega as imagens e outros assets necessários para o jogo
         function preload() {
@@ -65,6 +66,7 @@
             this.load.image('plataforma', 'assets/tijolos.png');
             this.load.image('moeda', 'assets/moeda.png');
             this.load.image('planeta', 'assets/planeta.png');
+            this.load.image('cometa', 'assets/cometa.png');
         }
 
         // Cria e posiciona os elementos do jogo na tela
@@ -87,6 +89,13 @@
             plataforma = this.physics.add.staticImage(larguraJogo/2, alturaJogo/2, 'plataforma');
             this.physics.add.collider(alien, plataforma);
 
+            // Cria a imagem estática do cometa e ativa a colisão   
+            cometa = this.physics.add.staticImage(600, 180, 'cometa');
+            cometa.setScale(0.25); // Diminui o tamanho do cometa para 25%
+            this.physics.add.collider(alien, cometa);
+            cometa.body.setSize(400, 130); // Define o tamanho da área de colisão
+            cometa.body.setOffset(435, 178); // Ajusta a posição da área de colisão relativa da imagem
+            
             // Cria o sprite da moeda, ativa a física e ativa as colisões e o efeito de bounce (quicar)
             moeda = this.physics.add.sprite(larguraJogo/2, 0, 'moeda');
             moeda.setCollideWorldBounds(true);
